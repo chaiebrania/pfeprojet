@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InstrumentSpecifique index{% endblock %}
+
+{% block body %}
+    <h1>InstrumentSpecifique index</h1>
+<div class="table-responsive">
+    <table class="table table-styling">
+        <thead>
+            <tr>
+                <th>Id</th>
+                 <th>code</th>
+                 <th>Etendu</th>
+                 <th>Date mis en service</th>
+                 <th>Frequence</th>
+                   <th>Date prochain calibrage</th>
+                <th>designation</th>
+                <th>poste</th>
+                <th>section</th>
+                <th>marque</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for instrument_specifique in instrument_specifiques %}
+            <tr>
+                <td>{{ instrument_specifique.id }}</td>
+                <td>{{instrument_specifique.numero}}</td>
+                 <td>{{ instrument_specifique.etendumin }}-{{instrument_specifique.etendumax }}</td>
+                <td>{{ instrument_specifique.datemisenservice|date('Y-m-d') }}</td>
+                   <td>{{ instrument_specifique.frequencecalibrage }}</td>
+                  <td> {{  instrument_specifique.datemisenservice|date_modify('+'~ instrument_specifique.frequencecalibrage ~ 'day')|date("m/d/Y") }}</td>
+                 <td>{{ instrument_specifique.getInstrumentGenerale().designation }}</td>
+                 <td>{{ instrument_specifique.getPoste().poste }}</td>
+                  <td>{{ instrument_specifique.Poste.getSection().section }}</td>
+                   <td>{{ instrument_specifique.getMarque().marque }}</td>
+                <td>
+                    <a href="{{ path('instrument_specifique_show', {'id': instrument_specifique.id}) }}">show</a>
+                    <a href="{{ path('instrument_specifique_edit', {'id': instrument_specifique.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <a href="{{ path('instrument_specifique_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Normeinstrument{% endblock %}
+
+{% block body %}
+    <h1>Normeinstrument</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ normeinstrument.id }}</td>
+            </tr>
+            <tr>
+                <th>Valeur</th>
+                <td>{{ normeinstrument.valeur }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('normeinstrument_index') }}">back to list</a>
+
+    <a href="{{ path('normeinstrument_edit', {'id': normeinstrument.id}) }}">edit</a>
+
+    {{ include('normeinstrument/_delete_form.html.twig') }}
+{% endblock %}

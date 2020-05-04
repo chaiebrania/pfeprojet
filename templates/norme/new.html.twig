@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Norme{% endblock %}
+
+{% block body %}
+    <h1>Create new Norme</h1>
+{{ form_start(form) }}
+    {# render the task's only field: description #}
+
+    <h3>Normes</h3>
+    <ul class="Normes" id="Norme_list" data-prototype="{{ form_widget(form.normees.vars.prototype)|e('html_attr') }}">
+        {# iterate over each existing tag and render its only field: name #}
+        {% for normeinstrument in form.normees %}
+        <div class="panel panel-warning">
+            <li>{{ form_row(normeinstrument.valeur) }}</li>
+            </div>
+        {% endfor %}
+     </ul>
+ {{ include('norme/_form.html.twig') }}
+{{ form_end(form) }}
+
+    
+
+    <a href="{{ path('norme_index') }}">back to list</a>
+{% endblock %}

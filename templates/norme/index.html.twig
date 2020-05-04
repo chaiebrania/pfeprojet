@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Norme index{% endblock %}
+
+{% block body %}
+    <h1>Norme index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>code</th>
+                <th>norme</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for norme in normes %}
+            <tr>
+                <td>{{ norme.id }}</td>
+                  <td>{{ norme.instrumentSpecifique }}</td>
+                  
+                <td>
+                    <a href="{{ path('norme_show', {'id': norme.id}) }}">show</a>
+                    <a href="{{ path('norme_edit', {'id': norme.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('norme_new') }}">Create new</a>
+{% endblock %}
